@@ -227,6 +227,7 @@
         ]);
 
         const App = React.createClass({
+
             getInitialState() {
                 return {
                     personList: [],
@@ -234,43 +235,46 @@
                 };
             },
 
-           getPersonList() {
-                return new Promise((resolve, reject) => {
-                    fetch('https://willowtreeapps.com/api/v1.0/profiles')
-                    .then(response => {
-                        if (response.status !== 200) {
-                            reject(new Error("Error!"));
-                        }
-
-                        response.json().then(personList => {
-                            this.setState({
-                              personList,
-                              visiblePersonList: personList
-                            })
-                        });
-                    });
-                });
-            },
-
             componentDidMount() {
-                this.getPersonList()
+                this._getPersonList()
             },
+
+            _getPersonList() {
+                fetch('https://willowtreeapps.com/api/v1.0/profiles')
+                     .then(response => {
+                         if (response.status !== 200) {
+                             reject(new Error("Error!"));
+                         }
+
+                         response.json().then(personList => {
+                             this.setState({
+                               personList,
+                               visiblePersonList: personList
+                             })
+                         });
+                     });
+             },
+
+            //for sort and shuffle - reference the current search results if there are any
+             _currentList() {
+                 return this.state.visiblePersonList || this.state.personList;
+             },
 
             _shuffleList() {
                 this.setState({
-                    visiblePersonList: shuffleList(this.state.personList)
+                    visiblePersonList: shuffleList(this._currentList())
                 });
             },
 
             _sortByFirst() {
                 this.setState({
-                    visiblePersonList: sortByFirstName(this.state.personList)
+                    visiblePersonList: sortByFirstName(this._currentList())
                 });
             },
 
             _sortByLast() {
                 this.setState({
-                    visiblePersonList: sortByLastName(this.state.personList)
+                    visiblePersonList: sortByLastName(this._currentList())
                 });
             },
 
