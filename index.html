@@ -123,7 +123,8 @@
 
          ***************************************************/
 
-
+        // these next two functions seem like the might be a bit overkill,
+        // I might opt to just use props.person.lastName in the render method
         const getLastName = (person) => {
             return person.lastName;
         }
@@ -223,7 +224,7 @@
             src: props.src
         });
 
-        const ListRow = (props) => React.DOM.tr({ key: `${props.person.firstName} ${props.person.lastName}` }, [
+        const ListRow = (props) => React.DOM.tr({ key: `${getFirstName(props.person)} ${getLastName(props.person)}` }, [
             React.DOM.td({ key: 'thumb' }, React.createElement(Thumbnail, { src: getImageUrl(props.person) })),
             React.DOM.td({ key: 'first' }, null, getFirstName(props.person)),
             React.DOM.td({ key: 'last' }, null, getLastName(props.person)),
