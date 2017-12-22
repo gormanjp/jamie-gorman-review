@@ -124,7 +124,7 @@
          ***************************************************/
 
 
-        function getLastName(person) {
+        const getLastName = (person) => {
             return person.lastName;
         }
 
@@ -139,7 +139,8 @@
         };
 
         /**
-         * Fisher-Yates shuffle
+         * This is another way to do shuffle thats a bit simpler of an
+         * implementation
          */
         function shuffleList(list) {
             return list.sort(() => 0.5 - Math.random());
@@ -234,8 +235,9 @@
                 React.DOM.th({ key: 'first-h' }, null, 'First Name'),
                 React.DOM.th({ key: 'last-h' }, null, 'Last Name')
             ])),
-            React.DOM.tbody({ key: 'tbody' }, props.personList.map((person, i) =>
-                React.createElement(ListRow, { key: `person-${i}`, person })))
+            // the api supplies a unique id, we can use that over index
+            React.DOM.tbody({ key: 'tbody' }, props.personList.map((person) =>
+                React.createElement(ListRow, { key: `${person.id}`, person })))
         ]);
 
         const App = React.createClass({
