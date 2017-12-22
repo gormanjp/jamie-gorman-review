@@ -162,7 +162,7 @@
          * Remove any people that do not have the name we are
          * searching for.
          */
-         
+
          /**
           * I changed the search here to look at both first and last names or
           * first and last together.  Also used toLowerCase so the user doesnt
@@ -215,7 +215,7 @@
 
         const sortByFirstName = sortObjListByProp('firstName');
 
-        const sortByLastName = (personList) => sortByFirstName(personList).reverse();
+        const sortByLastName = sortObjListByProp('lastName');
 
 
         /*==================================================
