@@ -142,19 +142,7 @@
          * Fisher-Yates shuffle
          */
         function shuffleList(list) {
-            // Make a copy & don't mutate the passed in list
-            let result = list.slice(1);
-
-            let tmp, j, i = list.length - 1
-
-            for (; i > 0; i -= 1) {
-                j = Math.floor(Math.random() * (i + 1));
-                tmp = list[i];
-                list[i] = list[j];
-                list[j] = tmp;
-            }
-
-            return result;
+            return list.sort(() => 0.5 - Math.random());
         }
 
 
@@ -196,7 +184,7 @@
             return function(objList) {
                 // Make a copy & don't mutate the passed in list
                 let result = objList.slice(1);
-
+                // could use external library like lodash here
                 result.sort((a, b) => {
                     if (a[prop] < b[prop]) {
                         return -1;
