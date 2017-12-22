@@ -162,9 +162,16 @@
          * Remove any people that do not have the name we are
          * searching for.
          */
+         
+         /**
+          * I changed the search here to look at both first and last names or
+          * first and last together.  Also used toLowerCase so the user doesnt
+          * have to worry about capitalizations in the search input.
+          */
         function filterByName(searchForName, personList) {
             return personList.filter((person) => {
-                return person.firstName === searchForName || person.lastName === searchForName;
+                const fullName = `${person.firstName} ${person.lastName}`.toLowerCase();
+                return fullName.includes(searchForName.toLowerCase());
             });
         }
 
